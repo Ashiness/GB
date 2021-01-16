@@ -70,12 +70,17 @@ namespace Homework2
                 case "3":
                     Console.WriteLine("Введите число: ");
                     string typing = Console.ReadLine();
+                    int Result = 0;
                     while (Convert.ToInt32(typing) > 0)
                     {
-                        Console.WriteLine($" Вы ввели {typing}");
+                        Console.WriteLine($"Вы ввели {typing}");
+                        if(Convert.ToInt32(typing) % 2 != 0)
+                        {
+                            Result = Result + Convert.ToInt32(typing);
+                        }
                         typing = Console.ReadLine();
                     }
-            
+                    Console.WriteLine($"Сумма нечётных чисел {Result}");
             break;
                 #endregion
                 #region Task 4
