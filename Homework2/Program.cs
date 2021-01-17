@@ -8,10 +8,21 @@ namespace Homework2
 {
     class Program
     {
-        static bool Odd(int n)
+        static int Sum()
         {
-            return n % 2 ==  0;
+            Console.Write("Введите число : ");
+            int num = int.Parse(Console.ReadLine());
+            int i = 0;
+            while (num > 0)
+            {
+                i++;
+                num /= 10;
+            }
+            Console.WriteLine("Количество цифр введенного числа : {0}", i);
+            Console.ReadKey();
+            return 0;
         }
+
         static int Check(int a, int b, int c)
         {
             int min;
@@ -63,8 +74,10 @@ namespace Homework2
                 #region Task 2
                 case "2":
 
-                    
-            break;
+                    Sum();
+
+
+                    break;
                 #endregion
                 #region Task 3
                 case "3":
@@ -86,7 +99,32 @@ namespace Homework2
                 #region Task 4
                 case "4":
 
-            break;
+                    string login = "root";
+                    string password = "GeekBrains";
+
+                    int count = 0;
+                    do
+                    {
+                        Console.WriteLine("\nВведите Логин:");
+                        string checkLogin = Console.ReadLine();
+
+                        Console.WriteLine("\nВведите Пароль:");
+                        string checkPassword = Console.ReadLine();
+
+                        if (login == checkLogin && password == checkPassword)
+                        {
+                            Console.WriteLine("Добро пожаловать в систему");
+                            Console.ReadLine();
+                            break;
+                        }
+                            Console.WriteLine("В доступе отказано");
+                            Console.ReadLine();
+                            ++count;
+                    }
+                    while (count < 3 );
+                    Console.WriteLine("Вы сделали " + count + " попыток ввода");
+
+                    break;
                 #endregion
                 #region Task 5
                 case "5":
