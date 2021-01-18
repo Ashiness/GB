@@ -8,7 +8,8 @@ namespace Homework2
 {
     class Program
     {
-        static int Sum()
+        #region Метод Sum
+        static int Sum()  //Метод посчета для задания 2
         {
             Console.Write("Введите число : ");
             int num = int.Parse(Console.ReadLine());
@@ -22,8 +23,10 @@ namespace Homework2
             Console.ReadKey();
             return 0;
         }
+        #endregion
 
-        static int Check(int a, int b, int c)
+        #region Метод Check
+        static int Check(int a, int b, int c) //метод расчёта для задания 1
         {
             int min;
 
@@ -41,17 +44,88 @@ namespace Homework2
             }
             return min;
         }
+        #endregion
+
+        #region Методы для ИМТ
+        static string CheckBMI(double bmi, double height) //метод для впроверки Индекса массы тела и вывод результата
+        {
+            string result = "";
+            if (bmi >= 18.5 && bmi <= 24.99)
+            {
+                result = "Всё в норме";
+            }
+            else if (bmi < 18.5)
+            {
+                result = String.Format("Обнаружен недостаток нормы веса!");
+            }
+            else if (bmi > 24.99)
+            {
+                result = String.Format("Обнаружено превышение нормы веса!");
+            }
 
 
+            return result;
+        }
+        static string CheckBodyMassIndex(double bmi, double height) //метод для проверки ИМТ и вывод результата с рекомендациями
+        {
+            string result = "";
+            if (bmi >= 18.5 && bmi <= 24.99)
+            {
+                result = "Всё в норме";
+            }
+            else if (bmi < 18.5)
+            {
+                double recommendadtion = (18.5 - bmi) * height * height;
+                result = String.Format("Необходимо набрать {0:0.00} кг для нормаизации веса!", recommendadtion);
+            }
+            else if (bmi > 24.99)
+            {
+                double recommendation = (bmi - 24.99) * height * height;
+                result = String.Format("Необходимо сбросить {0:0.00} кг для нормализации веса!", recommendation);
+            }
+
+
+            return result;
+        }
+        #endregion
+
+        #region Метод для чисел от a до b
+        static int AmountInNumber(string number)
+        {
+            return number.Length;
+        }
+
+        static string EnterCheck()
+        {
+            string number = "";
+            bool checkNotANumber;
+            do
+            {
+                checkNotANumber = false;
+                number = Console.ReadLine();
+                for (int i = 0; i < number.Length; i++)
+                {
+                    if (!Char.IsNumber(number, i))
+                    {
+                        checkNotANumber = true;
+                        Console.WriteLine("Неверный ввод (нужно число).\nПожалуйста повторите ввод: ");
+                        break;
+                    }
+                }
+            } while (checkNotANumber);
+            return number;
+        }
+        #endregion
         static void Main(string[] args)
         {
-            
+            //Меню для выбора задания
+            Console.WriteLine(" 1 - Минимальное из 3 чисел \n 2 - Подсчет количества цифр \n 3 - Подсчет суммы чисел \n 4 - Проверка логина и пароля \n 5 - ИМТ \n 6 - Вывод чисел в диапазоне");
             Console.WriteLine("Выберите задание");
             string caseSwitch = Console.ReadLine();
             Console.ReadLine();
             
 
-            switch (caseSwitch)
+            switch (caseSwitch) 
             {
                 #region Task 1
                 case "1":
@@ -129,16 +203,34 @@ namespace Homework2
                 #region Task 5
                 case "5":
 
-            break;
+                    Console.WriteLine("Введите массу: ");
+                    double mass = double.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Введите рост в см: ");
+                    double height = double.Parse(Console.ReadLine());
+
+                    height /= 100;
+
+                    double BMI = mass / (height * height);
+
+                    Console.WriteLine("Индекс массы тела: {0:0.##}", BMI );
+                    Console.WriteLine(CheckBMI(BMI, height));
+
+                    Console.WriteLine("Индекс массы тела: {0:0.##}", BMI);
+                    Console.WriteLine(CheckBodyMassIndex(BMI, height));
+                    Console.ReadLine();
+
+                    break;
                 #endregion
                 #region Task 6
                 case "6":
+                    Console.WriteLine("Введите число: ");
 
-            break;
-                #endregion
-                #region Task 7
-                case "7":
-            
+                    string number = EnterCheck();
+
+                    Console.WriteLine("Количество цифр: " + AmountInNumber(number));
+
+                    Console.ReadKey();
             break;
                 #endregion
 
@@ -147,6 +239,10 @@ namespace Homework2
                     
             break;
             }
+
+
+
+            
         }
     }
 }
