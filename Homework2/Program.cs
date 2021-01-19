@@ -88,9 +88,9 @@ namespace Homework2
             return result;
         }
         #endregion
-
-        #region Метод для чисел от a до b
-        static int AmountInNumber(string number)
+       
+        #region Метод для чисел от a до b 
+            static int AmountInNumber(string number) //Метод для Задания 7
         {
             return number.Length;
         }
@@ -116,10 +116,11 @@ namespace Homework2
             return number;
         }
         #endregion
+
         static void Main(string[] args)
         {
             //Меню для выбора задания
-            Console.WriteLine(" 1 - Минимальное из 3 чисел \n 2 - Подсчет количества цифр \n 3 - Подсчет суммы чисел \n 4 - Проверка логина и пароля \n 5 - ИМТ \n 6 - Вывод чисел в диапазоне");
+            Console.WriteLine(" 1 - Минимальное из 3 чисел \n 2 - Подсчет количества цифр \n 3 - Подсчет суммы чисел \n 4 - Проверка логина и пароля \n 5 - ИМТ \n 6 - Подсчёт <<Хороших>> чисел \n 7 - Вывод чисел в диапазоне");
             Console.WriteLine("Выберите задание");
             string caseSwitch = Console.ReadLine();
             Console.ReadLine();
@@ -128,7 +129,7 @@ namespace Homework2
             switch (caseSwitch) 
             {
                 #region Task 1
-                case "1":
+                case "1": //Минимальное из 3 чисел
 
                     Console.WriteLine("Введите a: ");
                     string a = Console.ReadLine();
@@ -196,7 +197,7 @@ namespace Homework2
                             ++count;
                     }
                     while (count < 3 );
-                    Console.WriteLine("Вы сделали " + count + " попыток ввода");
+                    Console.WriteLine($"Вы сделали {count} попыток ввода");
 
                     break;
                 #endregion
@@ -224,6 +225,32 @@ namespace Homework2
                 #endregion
                 #region Task 6
                 case "6":
+
+                    int goodnumcount = 0;
+                    DateTime start = DateTime.Now;
+                    int minNum = 1;
+                    int maxNum = 1000000000;
+                    int temp;
+                    int testnum;
+
+                    for (int num = minNum; num <= maxNum; num++)
+                    {
+                        temp = 0;
+                        testnum = num;
+                        while (testnum != 0)
+                        {
+                            temp += testnum % 10;
+                            testnum /= 10;
+                        }
+                        if (num % temp == 0) goodnumcount++;
+                    }
+                    Console.WriteLine($"Количество хороших чисел {goodnumcount}");
+                    Console.WriteLine(DateTime.Now - start);
+
+                    break;
+                #endregion
+                #region Task 7
+                case "7":
                     Console.WriteLine("Введите число: ");
 
                     string number = EnterCheck();
@@ -233,7 +260,7 @@ namespace Homework2
                     Console.ReadKey();
             break;
                 #endregion
-
+               
                 default:
                     Console.WriteLine("Завершение программы");
                     
