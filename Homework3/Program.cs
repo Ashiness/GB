@@ -57,35 +57,6 @@ namespace Homework3
 
         }
 
-        static int GetInt()
-        {
-            while (true)
-                if (!int.TryParse(Console.ReadLine(), out int x))
-                    Console.Write("Неверный ввод (требуется числовое значение).\nПожалуйста, повторите ввод: ");
-                else return x;
-        }
-        static int CheckExeptionByInput()
-        {
-            int result = 0;
-            bool exceptionDetected;
-            do
-            {
-                exceptionDetected = false;
-                try
-                {
-                    result = int.Parse(Console.ReadLine());
-                }
-                catch (Exception ex)
-                {
-                    exceptionDetected = true;
-                    string message = ex.Message;
-                    Console.WriteLine($"Возникло исключение: {message}");
-                    Console.Write("Пожалуйста, повторите ввод: ");
-                }
-
-            } while (exceptionDetected);
-            return result;
-        }
         static void Main(string[] args)
         {
 
@@ -134,25 +105,36 @@ namespace Homework3
                 #region Task 2
                 case "2":
 
-                    Console.WriteLine("Введите число, для завершения введите 0: ");
-
-                    int AmountOfOddNumbers = 0;
-                    while (true)
+                    Console.WriteLine("Введите число: ");
+                    string str = Console.ReadLine();
+                    int Result = 0;
+                    bool isNum = int.TryParse(str, out int typing);
+                    if (isNum)
                     {
-                        int number = CheckExeptionByInput();
-                        if (number == 0)
+                        while (typing != 0)
                         {
-                            break;
+                            if (typing >= 0)
+                            {
+                                if (typing % 2 != 0)
+                                {
+                                    Result = Result + typing;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Вы ввели некоректное число");
+                            }
+                            int.TryParse(Console.ReadLine(), out typing);
                         }
-                        else if (number > 0 && number % 2 == 1)
-                        {
-                            AmountOfOddNumbers++;
-                        }
+                        Console.WriteLine(typing);
+                        Console.WriteLine($"Сумма нечётных чисел {Result}");
                     }
-
-                    Console.WriteLine($"Количество чисел: {AmountOfOddNumbers}");
-
-                    Console.ReadKey();
+                    else
+                    {
+                        Console.WriteLine("Это текст");
+                    }
+                    
+                    
 
                     break;
                 #endregion
