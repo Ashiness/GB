@@ -8,9 +8,50 @@ namespace Homework3
 {
     class Program
     {
+        class Fraction
+        {
+            private int a = 0;
+            private int b = 0;
 
-
-
+            public Fraction(int a, int b)
+            {
+                this.a = a;
+                this.b = b;
+            }
+             public override string ToString()
+            {
+                return a.ToString() + "/" + b.ToString();
+            }
+            public static Fraction operator +(Fraction a, Fraction b)
+            {
+                Fraction t = new Fraction(1, 1);
+                t.a = (a.a * b.b + a.b * b.a);
+                t.b = a.b * b.b;
+                return t;
+            }
+            public static Fraction operator -(Fraction a, Fraction b)
+            {
+                Fraction t = new Fraction(1, 1);
+                t.a = (a.a * b.b - a.b * b.a);
+                t.b = a.b * b.b;
+                return t;
+            }
+            public static Fraction operator *(Fraction a, Fraction b)
+            {
+                Fraction t = new Fraction(1, 1);
+                t.a = (a.a * b.b * a.b * b.a);
+                t.b = a.b * b.b;
+                return t;
+            }
+            public static Fraction operator /(Fraction a, Fraction b)
+            {
+                Fraction t = new Fraction(1, 1);
+                t.a = (a.a * b.b / a.b * b.a);
+                t.b = a.b * b.b;
+                return t;
+            }
+        }
+        
         struct Complex
         {
             public double im;
@@ -59,7 +100,7 @@ namespace Homework3
 
         static void Main(string[] args)
         {
-
+            Console.WriteLine("1 - арифметические операции над структурой Complex \n2 - Подсчёт суммы нечетных чисел \n3 - арифметические операции с дробями");
             Console.WriteLine("Выберите задание");
             string caseSwitch = Console.ReadLine();
             Console.ReadLine();
@@ -140,6 +181,21 @@ namespace Homework3
                 #endregion
                 #region Task 3
                 case "3":
+                    Console.WriteLine("Введите числитель первого числа: ");
+                    int x = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Введите знаменатель первого числа: ");
+                    int y = int.Parse(Console.ReadLine());
+                    Fraction a = new Fraction(x, y);
+                    Console.WriteLine("Введите числитель второго числа: ");
+                    int z = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Введите знаменатель второго числа: ");
+                    int l = int.Parse(Console.ReadLine());
+                    Fraction b = new Fraction(z, l);
+
+                    Console.WriteLine(a.ToString() + "+" + b.ToString() + "=" + (a + b).ToString());
+                    Console.WriteLine(a.ToString() + "-" + b.ToString() + "=" + (a - b).ToString());
+                    Console.WriteLine(a.ToString() + "*" + b.ToString() + "=" + (a * b).ToString());
+                    Console.WriteLine(a.ToString() + "/" + b.ToString() + "=" + (a / b).ToString());
 
                     break;
                 #endregion
