@@ -7,6 +7,134 @@ using System.Threading.Tasks;
 
 namespace Homework4
 {
+    public class NewArray
+    {
+        int[] a;
+        private Stream fileName3;
+
+        public NewArray(ref int n, ref int el)
+        {
+            a = new int[n];
+            for (int i = 0; i < n; i++)
+                a[i] = el;
+        }
+        public NewArray(ref int n, ref int firstElement, ref int step)
+        {
+            a = new int[n];
+            a[0] = firstElement;
+            for (int i = 1; i < n; i++)
+                a[i] = a[i - 1] + step;
+        }
+        public NewArray(ref string fileName3)
+        {
+            if (File.Exists(fileName3))
+            {
+                string[] ss = File.ReadAllLines(fileName3);
+                a = new int[ss.Length];
+                for (int i = 0; i < ss.Length; i++)
+                    a[i] = int.Parse(ss[i]);
+            }
+            else Console.WriteLine("Ошибка загрузки файла");
+        }
+        public int Max
+        {
+            get
+            {
+                int max = a[0];
+                for (int i = 1; i < a.Length; i++)
+                    if (a[i] > max) max = a[i];
+                return max;
+            }
+        }
+        public int Sum1
+        {
+            get
+            {
+                int sum = 0;
+                for (int i = 0; i < a.Length; i++)
+                    sum += a[i];
+                return sum;
+            }
+        }
+        public int Inverse
+        {
+            set
+            {
+                for (int i = 0; i < a.Length; i++)
+                    a[i] = a[i] * -1;
+            }
+        }
+        public int Multiply
+        {
+            set
+            {
+                for (int i = 0; i < a.Length; i++)
+                    a[i] = a[i] * value;
+            }
+        }
+        public int Min
+        {
+            get
+            {
+                int min = a[0];
+                for (int i = 0; i < a.Length; i++)
+                    if (a[i] < min) min = a[i];
+                return min;
+            }
+        }
+        public int CountPisitive
+        {
+            get
+            {
+                int count = 0;
+                for (int i = 0; i < a.Length; i++)
+                    if (a[i] > 0) count++;
+                return count;
+            }
+        }
+        public int MaxCount
+        {
+            get
+            {
+                int max = Max;
+                int count = 0;
+                for (int i = 0; i < a.Length; i++)
+                    if (a[i] == max) count++;
+                return count;
+            }
+        }
+        public override string ToString()
+        {
+            string s = "";
+            foreach (int v in a)
+                s = s + v + " ";
+            return s;
+        }
+        public void SaveIntoFile(string fileName3)
+        {
+            StreamWriter sw = new StreamWriter(fileName3);
+            for (int i = 0; i < a.Length; i++)
+            {
+                sw.WriteLine(a[i]);
+            }
+            sw.Close();
+        }
+        public void LoadFromFile(string fileName3)
+        {
+            StreamReader sr = new StreamReader(fileName3);
+            int N = 0;
+            while (sr.ReadLine() != null) { N++; }
+
+            a = new int[N];
+            sr.DiscardBufferedData();
+            sr.BaseStream.Seek(0, System.IO.SeekOrigin.Begin);
+            for (int i = 0; i < N; i++)
+            {
+                a[i] = int.Parse(sr.ReadLine());
+            }
+            sr.Close();
+        }
+    }
 
     public class MyArray
     {
@@ -110,6 +238,15 @@ namespace Homework4
             for (int i = 0; i < t.GetLength(0); i++)
                 for (int j = 0; j < t.GetLength(1); j++)
                     sum += t[i, j];
+        }
+        public void IndexOfMax(out string index)
+        {
+            index = "-1, -1";
+            int max = Max;
+            for(int i = 0; i < t.GetLength(0); i++)
+                for( int j = 0; j < t.GetLength(1); j++)
+                    if (t[i, j] == max)
+                        index = i + ", " + j; 
         }
         public void SumMorThan(out long sum, int min)
         {
@@ -217,12 +354,13 @@ namespace Homework4
                 fileName = "..\\..\\" + fileName;
                 StreamReader sr = new StreamReader(fileName);
 
-                Login = sr.ReadLine();
+                var Login = sr.ReadLine();
 
-                Password = sr.ReadLine();
+                var Password = sr.ReadLine();
 
                 sr.Close();
             }
+        }
 
             static bool AuthorizationCheck(Authorization toCheck)
             {
@@ -231,10 +369,11 @@ namespace Homework4
                 else
                     return false;
             }
-        }
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Выберите задание");
+            Console.WriteLine("1 - массив из 20 элементов\n2 - дописанный класс\n3 - Авторизация\n4 - двумерный массив");
             string caseSwitch = Console.ReadLine();
             Console.ReadLine();
 
@@ -256,7 +395,55 @@ namespace Homework4
 
                 case "2":
 
+                    Console.WriteLine("Введите размер массива: ");
+                    int size = GetInt();
+                    Console.WriteLine("Введите первый элемент массива: ");
+                    int firstElement = GetInt();
+                    Console.WriteLine("Введите шаг добавления последующих элементов: ");
+                    int step = GetInt();
 
+                    NewArray b = new NewArray(ref size, ref firstElement, ref step);
+
+                    Console.WriteLine($"Создан массив: [ {b.ToString()} ]");
+
+                    Console.WriteLine($"Сумма элементов массива: {b.Sum1}");
+
+                    b.Inverse = -1;
+
+                    Console.WriteLine($"Массив с изменёнными знаками: [ {b.ToString()} ]");
+
+                    Console.WriteLine("Введите множитель: ");
+
+                    b.Multiply = GetInt();
+
+                    Console.WriteLine($"Массив, умноженный на {b.ToString()}");
+
+                    Console.WriteLine($"Максимальный элемент массива: {b.Max}");
+
+                    Console.WriteLine($"Количество максимальных элементов массива: {b.MaxCount}");
+
+                    Console.WriteLine("--------------------------------------------------------------------------");
+
+                    string fileName3 = "..\\..\\array.txt";
+                    NewArray newArray = new NewArray(ref fileName3);
+
+                    newArray.SaveIntoFile(fileName3);
+
+                    Console.WriteLine($"Создан следующий массив: [ {newArray.ToString()} ]");
+
+                    string fileName4 = "..\\..\\anotherArray.txt";
+
+                    newArray.SaveIntoFile(fileName3);
+
+                    Console.WriteLine($"Загружен следующий массив: [ {newArray.ToString()} ]");
+
+                    newArray.LoadFromFile(fileName4);
+
+                    NewArray newArray1 = new NewArray(ref fileName3);
+
+                    Console.WriteLine($"Проверка содрежимого файла: [ {newArray1.ToString()} ]");
+
+                    Console.ReadKey();
                     
                     break;
 
@@ -265,39 +452,44 @@ namespace Homework4
                 #region Task 3
 
                 case "3":
-                    /*
-                    Console.WriteLine("Проверка логина и пароля из файла ");
-                    int amountOfTries = 3;
-
-                    string[] fileName = { "data.txt", "tryData.txt", "reallyTryData.txt" };
+                    
+                    int count = 0;
 
                     Authorization authorization;
-                    authorization.Login = "";
-                    authorization.Password = "";
+                    
 
-                    int i = 0;
+                    string[] fileName = { "data.txt", "tryData.txt" };
+
+                    int i = 1;
 
                     do
                     {
-                        Console.WriteLine(fileName[i]);
+                        Console.WriteLine("Введите логин: ");
+                        authorization.Login = Console.ReadLine();
+                        Console.WriteLine("Введите пароль: ");
+                        authorization.Password = Console.ReadLine();
+
                         authorization.LoadForFile(fileName[i]);
 
                         if (AuthorizationCheck(authorization))
                         {
+                            Console.WriteLine("Успешный вход");
 
                             break;
                         }
                         else
                         {
-                            amountOfTries--;
-                            Console.WriteLine($"Неверный ввод логина и пароля? попыток осталось: {amountOfTries}");
+                            Console.WriteLine("В доступе отказано");
+                            Console.ReadLine();
+                            ++count;
                         }
-                        i++;
-                    }while (amountOfTries > 0);
-                    Console.WriteLine("Успешный вход");
+                        
+                    }while (count < 3);
+
+                    Console.WriteLine($"Попыток ввода: {count}");
 
                     Console.ReadKey();
-                    */
+                    
                     break;
 
                 #endregion
@@ -306,12 +498,62 @@ namespace Homework4
 
                 case "4":
 
+                    Console.WriteLine("Введите количество строк массива: ");
+                    int size1 = GetInt();
+                    Console.WriteLine("Введите количество столбцов массива: ");
+                    int size2 = GetInt();
 
+                    TwoDimentionalArray a = new TwoDimentionalArray(size1, size2);
+
+                    Console.WriteLine("Массив создан");
+
+                    a.PrintDinArr(a.toString());
+
+                    long sum = 0;
+                    a.Sum(out sum);
+
+                    Console.WriteLine($"Сумма элементов массива: {sum}");
+
+                    a.SumMorThan(out sum, a.t[0, 0]);
+                    Console.WriteLine($"Сумма элемeнтов массива, которые больше первого элемента: {sum}");
+
+                    Console.WriteLine($"Максимальный элемента массива {a.Max}");
+                    Console.WriteLine($"Минимальны элемента массива {a.Min}");
+
+                    string numOfMax = "";
+                    a.IndexOfMax(out numOfMax);
+                    Console.WriteLine($"Индекс максимальногоэлемента: {numOfMax}");
+
+                    Console.WriteLine("---------------------------------------------------------------------------");
+
+                    TwoDimentionalArray myDimArr = new TwoDimentionalArray();
+
+                    var fileName1 = "loadArray.txt";
+                    var fileName2 = "saveArray.txt";
+
+                    myDimArr.LoadFromFile(fileName1);
+
+                    Console.WriteLine($"Загрузка массива из файла {fileName1}");
+                    Console.WriteLine("Загрузка следующего массива");
+
+                    myDimArr.PrintDinArr(myDimArr.toString());
+
+                    Console.WriteLine($"Загрузка массива в файл {fileName2}");
+
+                    myDimArr.SaveIntoFile(fileName2);
+
+                    TwoDimentionalArray anotherDimArr = new TwoDimentionalArray(fileName2);
+
+                    Console.WriteLine($"Проверка файла, загрузка нового массива: ");
+
+                    anotherDimArr.PrintDinArr(anotherDimArr.toString());
+
+                    Console.ReadKey();
 
                     break;
 
                 #endregion
-
+                    
                 default:
                     Console.WriteLine("Завершение программы");
                     break;
