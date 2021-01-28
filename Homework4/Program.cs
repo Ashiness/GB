@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Homework4
 {
+    
     public class NewArray
     {
         int[] a;
