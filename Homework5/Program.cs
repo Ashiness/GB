@@ -8,27 +8,6 @@ using System.IO;
 
 namespace Homework5
 {
-    struct Believe
-    {
-        public string Question;
-        public string Answer;
-
-        public void LoadForFile(string fileName)
-        {
-            fileName = "..\\..\\" + fileName;
-            StreamReader sr = new StreamReader(fileName);
-
-            var Qestion = sr.ReadLine();
-
-            var Answer = sr.ReadLine();
-
-            sr.Close();
-        }
-        public static string RandomQuestions()
-        {
-
-        }
-    }
     struct Elemnt
     {
         public string NL;
@@ -145,15 +124,13 @@ namespace Homework5
             char letter = login[0];
             if (Char.IsDigit(letter)) 
                return false;
-            if (Regex.IsMatch(login, @"^[A - Za - z0-9]{2,10}$"))
+            if (Regex.IsMatch(login, @"^[A-Za-z0-9]{2,10}$"))
             {
-                Console.WriteLine("OK");
                 return true;
                 
             }
             else
             {
-                Console.WriteLine("ne ok");
                 return false;
             }
         }
@@ -218,6 +195,7 @@ namespace Homework5
         static void Main(string[] args)
         {
             Console.WriteLine("Выберите задание");
+            Console.WriteLine("1 - Проверка логина \n2 - Класс Message \n3 - Метод для проверки перестановки \n4 - ЕГЭ");
             string caseSwitch = Console.ReadLine();
             Console.ReadLine();
 
@@ -244,7 +222,6 @@ namespace Homework5
                         {
                             count++;
                             Console.WriteLine("Логин не подходит\nЛогин должен быть от 2 до 10 символов, содержать только латинские символы, цифры не должны быть в начале логина");
-                            Console.WriteLine(LogRegular(login));
                         }
                     } while (count < 3);
 
@@ -380,26 +357,6 @@ namespace Homework5
 
                 #endregion
 
-                #region Task 5
-
-                case "5":
-
-                    int score = 0;
-
-                    Believe believe;
-
-                    string[] fileName = { "BelieveOrNot.txt "};
-
-                    int questions = 0;
-
-                    do
-                    {
-
-                    } while (questions < 5);
-
-                    break;
-
-                #endregion
 
                 default:
                     Console.WriteLine("Завершение программы");
