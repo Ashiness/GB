@@ -34,12 +34,12 @@ namespace WF_Udvoitel
             this.btnReset = new System.Windows.Forms.Button();
             this.lblNumber = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.lblStart = new System.Windows.Forms.Label();
             this.lblCounter = new System.Windows.Forms.Label();
             this.text = new System.Windows.Forms.Label();
             this.btnCheck = new System.Windows.Forms.Button();
             this.Congrats = new System.Windows.Forms.Label();
+            this.lblRandomNumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCommand1
@@ -81,11 +81,12 @@ namespace WF_Udvoitel
             // lblNumber
             // 
             this.lblNumber.AutoSize = true;
+            this.lblNumber.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.lblNumber.Location = new System.Drawing.Point(153, 38);
             this.lblNumber.Name = "lblNumber";
-            this.lblNumber.Size = new System.Drawing.Size(35, 13);
+            this.lblNumber.Size = new System.Drawing.Size(44, 13);
             this.lblNumber.TabIndex = 3;
-            this.lblNumber.Text = "label1";
+            this.lblNumber.Text = "Number";
             // 
             // btnStart
             // 
@@ -97,28 +98,20 @@ namespace WF_Udvoitel
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(441, 152);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(98, 23);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // lblStart
             // 
             this.lblStart.AutoSize = true;
+            this.lblStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblStart.Location = new System.Drawing.Point(45, 261);
             this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(35, 13);
+            this.lblStart.Size = new System.Drawing.Size(29, 13);
             this.lblStart.TabIndex = 6;
-            this.lblStart.Text = "label1";
+            this.lblStart.Text = "Start";
             // 
             // lblCounter
             // 
             this.lblCounter.AutoSize = true;
+            this.lblCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblCounter.Location = new System.Drawing.Point(470, 261);
             this.lblCounter.Name = "lblCounter";
             this.lblCounter.Size = new System.Drawing.Size(35, 13);
@@ -128,6 +121,7 @@ namespace WF_Udvoitel
             // text
             // 
             this.text.AutoSize = true;
+            this.text.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.text.Location = new System.Drawing.Point(286, 260);
             this.text.Name = "text";
             this.text.Size = new System.Drawing.Size(35, 13);
@@ -136,6 +130,7 @@ namespace WF_Udvoitel
             // 
             // btnCheck
             // 
+            this.btnCheck.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnCheck.Location = new System.Drawing.Point(156, 97);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(75, 23);
@@ -147,28 +142,40 @@ namespace WF_Udvoitel
             // Congrats
             // 
             this.Congrats.AutoSize = true;
+            this.Congrats.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Congrats.Location = new System.Drawing.Point(184, 161);
             this.Congrats.Name = "Congrats";
             this.Congrats.Size = new System.Drawing.Size(49, 13);
             this.Congrats.TabIndex = 10;
             this.Congrats.Text = "Congrats";
             // 
+            // lblRandomNumber
+            // 
+            this.lblRandomNumber.AutoSize = true;
+            this.lblRandomNumber.Location = new System.Drawing.Point(323, 38);
+            this.lblRandomNumber.Name = "lblRandomNumber";
+            this.lblRandomNumber.Size = new System.Drawing.Size(47, 13);
+            this.lblRandomNumber.TabIndex = 11;
+            this.lblRandomNumber.Text = "Random";
+            // 
             // form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 369);
+            this.ClientSize = new System.Drawing.Size(596, 364);
+            this.Controls.Add(this.lblRandomNumber);
             this.Controls.Add(this.Congrats);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.text);
             this.Controls.Add(this.lblCounter);
             this.Controls.Add(this.lblStart);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblNumber);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCommand2);
             this.Controls.Add(this.btnCommand1);
+            this.MaximumSize = new System.Drawing.Size(612, 403);
+            this.MinimumSize = new System.Drawing.Size(612, 403);
             this.Name = "form1";
             this.Text = "Удвоитель";
             this.ResumeLayout(false);
@@ -183,12 +190,12 @@ namespace WF_Udvoitel
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label lblNumber;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.Label lblCounter;
         private System.Windows.Forms.Label text;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Label Congrats;
+        private System.Windows.Forms.Label lblRandomNumber;
     }
 }
 
